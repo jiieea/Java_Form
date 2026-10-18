@@ -3,37 +3,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.oopdemo;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
  */
 public class Form extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Form.class.getName());
 
     /**
      * Creates new form Form
      */
-    
-        private final ArrayList<Mahasiswa> daftarMahasiswa = new ArrayList<>();
+    private final ArrayList<Mahasiswa> daftarMahasiswa = new ArrayList<>();
     private DefaultTableModel tableModel;
 
     public Form() {
         initComponents();
         initTable();
+        submit.addActionListener(this::submitActionPerformed);
     }
-    
-     private void initTable() {
+
+    private void initTable() {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("NIM");
         tableModel.addColumn("Nama");
+        tableModel.addColumn("IPK");
+        tableModel.addColumn("Angkatan");
+
         tblMahasiswa.setModel(tableModel);
     }
-     
-      private void refreshTable() {
+
+    private void refreshTable() {
         tableModel.setRowCount(0);
         for (Mahasiswa m : daftarMahasiswa) {
             tableModel.addRow(new Object[]{
@@ -62,15 +67,15 @@ public class Form extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMahasiswa = new javax.swing.JTable();
+        reset = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nama");
 
-        textName.setText("jTextField1");
         textName.addActionListener(this::textNameActionPerformed);
 
-        textNpm.setText("jTextField1");
         textNpm.addActionListener(this::textNpmActionPerformed);
 
         jLabel2.setText("Npm");
@@ -80,10 +85,8 @@ public class Form extends javax.swing.JFrame {
 
         jLabel3.setText("IPK");
 
-        textIpk.setText("jTextField1");
         textIpk.addActionListener(this::textIpkActionPerformed);
 
-        textAngkatan.setText("jTextField1");
         textAngkatan.addActionListener(this::textAngkatanActionPerformed);
 
         jLabel4.setText("Angkatan");
@@ -96,10 +99,16 @@ public class Form extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NPM", "Nama", "IPK", "Angkatan"
             }
         ));
         jScrollPane1.setViewportView(tblMahasiswa);
+
+        reset.setText("Submit");
+        reset.addActionListener(this::resetActionPerformed);
+
+        exit.setText("exit");
+        exit.addActionListener(this::exitActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,27 +117,27 @@ public class Form extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addGap(189, 189, 189)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textNpm, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                        .addComponent(submit)
-                        .addGap(258, 258, 258))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(189, 189, 189)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textNpm, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textIpk, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(submit)
+                            .addComponent(reset)
+                            .addComponent(exit))
+                        .addGap(255, 255, 255))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,17 +151,19 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(submit)
                     .addComponent(jLabel2)
                     .addComponent(textNpm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textIpk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textIpk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reset))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(textAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
+                    .addComponent(textAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exit))
+                .addGap(79, 79, 79)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,17 +179,18 @@ public class Form extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         String nim = textNpm.getText().trim();
-        String nama = txtName.getText().trim();
+        System.out.println("NPM=[" + textNpm.getText() + "] this=" + this.hashCode());
+        String nama = textName.getText().trim();
         String ipkText = textIpk.getText().trim();
         String angkatan = textAngkatan.getText().trim();
 
-        if (nim.isEmpty() || nama.isEmpty() || ipkText.isEmpty() || angkatan.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         try {
+//             make sure all fields are filled
+            if (nim.isEmpty() || nama.isEmpty() || ipkText.isEmpty() || angkatan.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Semua Field wajib diisi", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             double ipk = Double.parseDouble(ipkText.replace(',', '.'));
             if (ipk < 0.0 || ipk > 4.0) {
                 JOptionPane.showMessageDialog(this, "IPK harus antara 0.0 - 4.0!", "Error",
@@ -190,7 +202,7 @@ public class Form extends javax.swing.JFrame {
             refreshTable();
 
             textNpm.setText("");
-            txtName.setText("");
+            textName.setText("");
             textIpk.setText("");
             textAngkatan.setText("");
             textNpm.requestFocus();
@@ -209,6 +221,22 @@ public class Form extends javax.swing.JFrame {
     private void textAngkatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAngkatanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textAngkatanActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        textNpm.setText("");
+        textName.setText("");
+        textIpk.setText("");
+        textAngkatan.setText("");
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(this,"are u sure wanna exit ?" , "Confirm" , JOptionPane.YES_NO_OPTION);
+        if(option == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,17 +264,18 @@ public class Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton reset;
     private javax.swing.JButton submit;
     private javax.swing.JTable tblMahasiswa;
     private javax.swing.JTextField textAngkatan;
     private javax.swing.JTextField textIpk;
     private javax.swing.JTextField textName;
     private javax.swing.JTextField textNpm;
-    public java.awt.TextField txtName;
     // End of variables declaration//GEN-END:variables
 }
