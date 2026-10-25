@@ -26,11 +26,58 @@ public class OOPDEMO {
         }
 
         if (pilihan == 1) {
-            runConsoleMode(scanner);
+            System.out.println("1. Tambah Data Mahasiswa");
+            System.out.println("2. Tambah Data Matakuliah");
+            int opsi = scanner.nextInt();
+            if (opsi == 1) {
+                runConsoleMode(scanner);
+            } else {
+                runConsoleMatkul(scanner);
+            }
         } else {
             System.out.println("\nMembuka jendela GUI...");
             java.awt.EventQueue.invokeLater(() -> new Form().setVisible(true));
         }
+    }
+
+    private static void runConsoleMatkul(Scanner scanner) {
+        ArrayList<Matkul> daftarMatkul = new ArrayList<>();
+        int counter = 1;
+        boolean next = true;
+
+        while (next) {
+            System.out.println("\n--- Input Data MataKuliah ke-" + counter + " ---");
+            System.out.print("Masukkan Nama Matkul      : ");
+            String namaMk = scanner.nextLine().trim();
+            scanner.nextLine();
+            System.out.println("Masukkan Kode Matkul     : ");
+            String kodeMk = scanner.nextLine().trim();
+            System.out.println("Masukkan SKS : ");
+            int sks = scanner.nextInt();
+
+            daftarMatkul.add(new Matkul(namaMk, sks, kodeMk));
+
+            while (true) {
+                System.out.print("\nTambah Matkul lagi? (y/n): ");
+                String jawab = scanner.nextLine().trim();
+                if (jawab.equalsIgnoreCase("y")) {
+                    break;
+                } else if (jawab.equalsIgnoreCase("n")) {
+                    next = false;
+                    break;
+                }
+                System.out.println("Jawab dengan 'y' atau 'n'.");
+            }
+            counter++;
+        }
+        System.out.println("\n=============================================");
+        System.out.println("         DAFTAR SEMUA MATKUL             ");
+        System.out.println("=============================================");
+
+        for (Matkul m : daftarMatkul) {
+            m.tampilkanInformasi();
+        }
+
     }
 
     private static void runConsoleMode(Scanner scanner) {

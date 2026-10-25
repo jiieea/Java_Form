@@ -14,7 +14,7 @@ public class Matkul {
     String kodeMk;
 
 
-    public void Matkul(String namaMatkul, int sks,String kodeMk) {
+    public Matkul(String namaMatkul, int sks,String kodeMk) {
         this.namaMk = namaMatkul;
         this.sks = sks;
         this.kodeMk = kodeMk;
@@ -31,4 +31,10 @@ public class Matkul {
         return kodeMk;
     }
 
+     public void tampilkanInformasi() {
+        System.out.println("Nama Matkul      : " + namaMk);
+        System.out.println("Kode matkul     : " + kodeMk);
+        System.out.println("Jumlah SKS      : " + sks);
+        System.out.println("---------------------------------------------");
+    }
 }

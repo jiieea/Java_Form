@@ -13,9 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author USER
  */
 public class Form extends javax.swing.JFrame {
-
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Form.class.getName());
-
     /**
      * Creates new form Form
      */
@@ -25,7 +23,7 @@ public class Form extends javax.swing.JFrame {
     public Form() {
         initComponents();
         initTable();
-        submit.addActionListener(this::submitActionPerformed);
+        System.out.println("Listeners: " + submit.getActionListeners().length);
     }
 
     private void initTable() {
@@ -56,6 +54,8 @@ public class Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
         textNpm = new javax.swing.JTextField();
@@ -69,6 +69,10 @@ public class Form extends javax.swing.JFrame {
         tblMahasiswa = new javax.swing.JTable();
         reset = new javax.swing.JButton();
         exit = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,7 +108,7 @@ public class Form extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblMahasiswa);
 
-        reset.setText("Submit");
+        reset.setText("Reset");
         reset.addActionListener(this::resetActionPerformed);
 
         exit.setText("exit");
@@ -269,6 +273,8 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton reset;
     private javax.swing.JButton submit;
