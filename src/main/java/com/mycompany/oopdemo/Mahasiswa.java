@@ -20,7 +20,7 @@ public class Mahasiswa {
         this.ipk = ipk;
         this.angkatan = angkatan;
     }
-    // Getter dan Setter
+    
     public String getNim() { return nim; }
     public String getNama() { return nama; }
     public double getIpk() { return ipk; }
@@ -38,4 +38,6 @@ public class Mahasiswa {
         System.out.println("Status   : " + getStatus());
         System.out.println("---------------------------------------------");
     }
+    
 }
+

@@ -13,22 +13,30 @@ public class Matkul {
     int sks;
     String kodeMk;
 
-
-    public void Matkul(String namaMatkul, int sks,String kodeMk) {
+    public Matkul(String namaMatkul, int sks, String kodeMk) {
         this.namaMk = namaMatkul;
         this.sks = sks;
         this.kodeMk = kodeMk;
     }
-    
+
 //    getter
     public String getNamaMk() {
         return namaMk;
     }
+
     public int getSks() {
         return sks;
     }
+
     public String getKodeMk() {
         return kodeMk;
+    }
+
+    public void tampilkanInformasi() {
+        System.out.println("Matkul      : " + namaMk);
+        System.out.println("SKS : " + sks);
+        System.out.println("Kode mata kuliah   : " + kodeMk);
+        System.out.println("---------------------------------------------");
     }
 
 }

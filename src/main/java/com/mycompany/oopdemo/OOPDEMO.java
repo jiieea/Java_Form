@@ -26,14 +26,62 @@ public class OOPDEMO {
         }
 
         if (pilihan == 1) {
-            runConsoleMode(scanner);
+            System.out.println("1. Input Mahasiswa");
+            System.out.println("2. Input MataKuliah");
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("1")) {
+                runConsoleModeMhs(scanner);
+            } else {
+                runConsoleModeMatkul(scanner);
+            }
         } else {
             System.out.println("\nMembuka jendela GUI...");
             java.awt.EventQueue.invokeLater(() -> new Form().setVisible(true));
         }
     }
 
-    private static void runConsoleMode(Scanner scanner) {
+    private static void runConsoleModeMatkul(Scanner scanner) {
+        ArrayList<Matkul> daftarMatkul = new ArrayList<>();
+        boolean next = true;
+        int counter = 1;
+
+        while (next) {
+
+            System.out.println("\n--- Input Data Mahasiswa ke-" + counter + " ---");
+            System.out.print("Masukkan Nama Matkul      : ");
+            String namaMk = scanner.nextLine().trim();
+
+            System.out.print("Masukkan Jumlah SKS     : ");
+            int sks = scanner.nextInt();
+            System.out.print("Masukan kode matkul   :");
+            String kodeMk = scanner.nextLine().trim();
+
+
+            daftarMatkul.add(new Matkul(namaMk, sks, kodeMk));
+              while (true) {
+                System.out.print("\nTambah matkul lagi? (y/n): ");
+                String jawab = scanner.nextLine().trim();
+                if (jawab.equalsIgnoreCase("y")) {
+                    break;
+                } else if (jawab.equalsIgnoreCase("n")) {
+                    next = false;
+                    break;
+                }
+                System.out.println("Jawab dengan 'y' atau 'n'.");
+            }
+            counter++;
+        }
+         System.out.println("\n=============================================");
+        System.out.println("         DAFTAR SELURUH MAHASISWA            ");
+        System.out.println("=============================================");
+
+        for (Matkul m : daftarMatkul) {
+            m.tampilkanInformasi();
+        }
+        System.out.println("Total Mahasiswa Terdaftar: " + daftarMatkul.size());
+    }
+
+    private static void runConsoleModeMhs(Scanner scanner) {
         ArrayList<Mahasiswa> daftarMahasiswa = new ArrayList<>();
         boolean lanjut = true;
         int counter = 1;
