@@ -43,16 +43,17 @@ public class OOPDEMO {
     private static void runConsoleModeMatkul(Scanner scanner) {
         ArrayList<Matkul> daftarMatkul = new ArrayList<>();
         boolean next = true;
-        int counter = 1;
+        int counter = 1; // banyak matkul diambil
+        int counterSks = 0; // akumulasi total sks yang diambil
 
         while (next) {
-
-            System.out.println("\n--- Input Data Mahasiswa ke-" + counter + " ---");
+            System.out.println("\n--- Input Data Matkul ke-" + counter + " ---");
             System.out.print("Masukkan Nama Matkul      : ");
             String namaMk = scanner.nextLine().trim();
 
             System.out.print("Masukkan Jumlah SKS     : ");
             int sks = scanner.nextInt();
+            
             System.out.print("Masukan kode matkul   :");
             String kodeMk = scanner.nextLine().trim();
 
@@ -69,6 +70,7 @@ public class OOPDEMO {
                 }
                 System.out.println("Jawab dengan 'y' atau 'n'.");
             }
+              counterSks += sks;
             counter++;
         }
          System.out.println("\n=============================================");
@@ -78,7 +80,8 @@ public class OOPDEMO {
         for (Matkul m : daftarMatkul) {
             m.tampilkanInformasi();
         }
-        System.out.println("Total Mahasiswa Terdaftar: " + daftarMatkul.size());
+        System.out.println("Total Matkul Terdaftar: " + daftarMatkul.size());
+        System.out.println("Totak SKS yang diambil : " + counterSks);
     }
 
     private static void runConsoleModeMhs(Scanner scanner) {
@@ -123,6 +126,11 @@ public class OOPDEMO {
             m.tampilkanInformasi();
         }
         System.out.println("Total Mahasiswa Terdaftar: " + daftarMahasiswa.size());
+    }
+    
+    
+    private static int getTotalSks(int counter , int currentSks) {
+        return counter += currentSks;
     }
 
     // Reads IPK as text so both "3.5" and "3,5" work, regardless of system locale
