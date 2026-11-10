@@ -31,6 +31,7 @@ public class Matkul {
     public String getKodeMk() {
         return kodeMk;
     }
+    
 
     public void tampilkanInformasi() {
         System.out.println("Matkul      : " + namaMk);

@@ -16,23 +16,27 @@ public class OOPDEMO {
 
         int pilihan;
         while (true) {
-            System.out.print("Pilih mode (1/2): ");
+            System.out.print("Pilih mode (1/2: ");
             String input = scanner.nextLine().trim();
-            if (input.equals("1") || input.equals("2")) {
+            if (input.equals("1") || input.equals("2")) { // 1 & 2 atau 3
+//                String -> integer
                 pilihan = Integer.parseInt(input);
                 break;
             }
-            System.out.println("Pilihan tidak valid! Masukkan 1 atau 2.");
+            System.out.println("Pilihan tidak valid!");
         }
 
         if (pilihan == 1) {
             System.out.println("1. Input Mahasiswa");
             System.out.println("2. Input MataKuliah");
+            System.out.println("3. Input Dosen");
             String input = scanner.nextLine().trim();
             if (input.equalsIgnoreCase("1")) {
                 runConsoleModeMhs(scanner);
-            } else {
+            } else if (pilihan == 2) {
                 runConsoleModeMatkul(scanner);
+            } else {
+                runConsoleDosen(scanner); // argument
             }
         } else {
             System.out.println("\nMembuka jendela GUI...");
@@ -40,9 +44,53 @@ public class OOPDEMO {
         }
     }
 
+//    input data dosen\
+    private static void runConsoleDosen(Scanner scanner) {
+        ArrayList<Dosen> daftarDosen = new ArrayList<>(); // Empty array []
+        boolean next = true; // indicator data adding
+        int counter = 1; // calculate data
+
+        while (next) { // false
+            System.out.println("\n--- Input Data Dosen ke-" + counter + " ---");
+            System.out.print("Masukkan Nama Dosen      : ");
+            String namaDosen = scanner.nextLine().trim();
+             System.out.print("Masukkan NID     : ");
+            String nid = scanner.nextLine().trim(); //ignore whitespace 
+
+            System.out.print("Masukan Matkul   :");
+            String lecture = scanner.nextLine().trim();
+            System.out.println("Masukan nomor telepon : ");
+            String phone = scanner.nextLine().trim();
+            
+//            addd new data and insert it to ArrayList
+        daftarDosen.add(new Dosen(namaDosen,nid ,lecture , phone)); 
+        while (true) {
+                System.out.print("\nTambah dosen lagi? (y/n): ");
+                String jawab = scanner.nextLine().trim();
+                if (jawab.equalsIgnoreCase("y")) { // y | Y
+                    break; // stop
+                } else if (jawab.equalsIgnoreCase("n")) { // n | N
+                    next = false;
+                    break; // stop
+                }
+                System.out.println("Jawab dengan 'y' atau 'n'.");
+            }
+        counter++;
+        }
+         System.out.println("\n=============================================");
+        System.out.println("         DAFTAR SELURUH DOSEN            ");
+        System.out.println("=============================================");
+
+        for (Dosen d : daftarDosen) {
+            d.tampilkanInformasi();
+        }
+        System.out.println("Total Dosen : " + daftarDosen.size()); // size : array length
+
+    }
+
     private static void runConsoleModeMatkul(Scanner scanner) {
         ArrayList<Matkul> daftarMatkul = new ArrayList<>();
-        boolean next = true;
+        boolean next = true; // boolean true : false
         int counter = 1; // banyak matkul diambil
         int counterSks = 0; // akumulasi total sks yang diambil
 
@@ -53,13 +101,12 @@ public class OOPDEMO {
 
             System.out.print("Masukkan Jumlah SKS     : ");
             int sks = scanner.nextInt();
-            
+
             System.out.print("Masukan kode matkul   :");
             String kodeMk = scanner.nextLine().trim();
 
-
             daftarMatkul.add(new Matkul(namaMk, sks, kodeMk));
-              while (true) {
+            while (true) {
                 System.out.print("\nTambah matkul lagi? (y/n): ");
                 String jawab = scanner.nextLine().trim();
                 if (jawab.equalsIgnoreCase("y")) {
@@ -70,10 +117,10 @@ public class OOPDEMO {
                 }
                 System.out.println("Jawab dengan 'y' atau 'n'.");
             }
-              counterSks += sks;
+            counterSks += sks;
             counter++;
         }
-         System.out.println("\n=============================================");
+        System.out.println("\n=============================================");
         System.out.println("         DAFTAR SELURUH MAHASISWA            ");
         System.out.println("=============================================");
 
@@ -86,16 +133,17 @@ public class OOPDEMO {
 
     private static void runConsoleModeMhs(Scanner scanner) {
         ArrayList<Mahasiswa> daftarMahasiswa = new ArrayList<>();
+//        [pijar  , 3423434 , 3 , 2024]
         boolean lanjut = true;
         int counter = 1;
 
         while (lanjut) {
             System.out.println("\n--- Input Data Mahasiswa ke-" + counter + " ---");
             System.out.print("Masukkan NIM      : ");
-            String nim = scanner.nextLine().trim();
+            String nim = scanner.nextLine().trim(); //343432322
 
             System.out.print("Masukkan Nama     : ");
-            String nama = scanner.nextLine().trim();
+            String nama = scanner.nextLine().trim(); // pijar
 
             double ipk = bacaIpk(scanner);
 
@@ -127,9 +175,8 @@ public class OOPDEMO {
         }
         System.out.println("Total Mahasiswa Terdaftar: " + daftarMahasiswa.size());
     }
-    
-    
-    private static int getTotalSks(int counter , int currentSks) {
+
+    private static int getTotalSks(int counter, int currentSks) {
         return counter += currentSks;
     }
 
@@ -139,6 +186,7 @@ public class OOPDEMO {
             System.out.print("Masukkan IPK      : ");
             String input = scanner.nextLine().trim().replace(',', '.');
             try {
+//                string - double
                 double ipk = Double.parseDouble(input);
                 if (ipk >= 0.0 && ipk <= 4.0) {
                     return ipk;

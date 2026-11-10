@@ -9,11 +9,11 @@ package com.mycompany.oopdemo;
  * @author USER
  */
 public class Mahasiswa {
-    private final String nim;
+    private final String nim;  
     private final String nama;
-    private final double ipk;
+    private final double ipk; 
     private final String angkatan;
-
+   
     public Mahasiswa(String nim, String nama, double ipk, String angkatan) {
         this.nim = nim;
         this.nama = nama;

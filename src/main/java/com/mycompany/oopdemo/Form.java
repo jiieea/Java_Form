@@ -25,7 +25,6 @@ public class Form extends javax.swing.JFrame {
     public Form() {
         initComponents();
         initTable();
-        submit.addActionListener(this::submitActionPerformed);
     }
 
     private void initTable() {
