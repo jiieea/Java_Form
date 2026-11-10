@@ -16,7 +16,7 @@ public class OOPDEMO {
 
         int pilihan;
         while (true) {
-            System.out.print("Pilih mode (1/2: ");
+            System.out.print("Pilih mode (1/2:) ");
             String input = scanner.nextLine().trim();
             if (input.equals("1") || input.equals("2")) { // 1 & 2 atau 3
 //                String -> integer
@@ -30,6 +30,7 @@ public class OOPDEMO {
             System.out.println("1. Input Mahasiswa");
             System.out.println("2. Input MataKuliah");
             System.out.println("3. Input Dosen");
+            System.out.println("=============================================");
             String input = scanner.nextLine().trim();
             if (input.equalsIgnoreCase("1")) {
                 runConsoleModeMhs(scanner);
