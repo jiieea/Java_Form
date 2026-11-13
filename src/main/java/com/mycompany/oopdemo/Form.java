@@ -38,9 +38,9 @@ public class Form extends javax.swing.JFrame {
     }
 
     private void refreshTable() {
-        tableModel.setRowCount(0);
+        tableModel.setRowCount(0); //row kosong
         for (Mahasiswa m : daftarMahasiswa) {
-            tableModel.addRow(new Object[]{
+            tableModel.addRow(new Object[]{ // kesisi
                 m.getNim(), m.getNama(), m.getIpk(), m.getAngkatan(), m.getStatus()
             });
         }
@@ -178,13 +178,12 @@ public class Form extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         String nim = textNpm.getText().trim();
-        System.out.println("NPM=[" + textNpm.getText() + "] this=" + this.hashCode());
         String nama = textName.getText().trim();
         String ipkText = textIpk.getText().trim();
         String angkatan = textAngkatan.getText().trim();
 
         try {
-//             make sure all fields are filled
+//             pastikan semua inputan terisi
             if (nim.isEmpty() || nama.isEmpty() || ipkText.isEmpty() || angkatan.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Semua Field wajib diisi", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -207,7 +206,7 @@ public class Form extends javax.swing.JFrame {
             textNpm.requestFocus();
 
             JOptionPane.showMessageDialog(this, "Data Mahasiswa Berhasil Disimpan!");
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { // blok catch nangkep error
             JOptionPane.showMessageDialog(this, "Format IPK harus angka!", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }

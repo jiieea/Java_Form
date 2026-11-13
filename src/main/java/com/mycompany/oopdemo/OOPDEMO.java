@@ -40,7 +40,7 @@ public class OOPDEMO {
             }
         } else {
             System.out.println("\nMembuka jendela GUI...");
-            java.awt.EventQueue.invokeLater(() -> new Form().setVisible(true));
+            java.awt.EventQueue.invokeLater(() -> new MatkulForm().setVisible(true));
         }
     }
 

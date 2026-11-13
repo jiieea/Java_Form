@@ -9,11 +9,13 @@ package com.mycompany.oopdemo;
  * @author USER
  */
 public class Dosen {
+//    attribute
     private final String namaDosen;
     private final String NID;
     private final String lecture;
     private final String phone;
     
+//    consturctor
     public Dosen(String nd , String nid , String matkul, String noHp) {
        namaDosen = nd;
        NID = nid;
@@ -35,6 +37,7 @@ public class Dosen {
     public String getPhone() {
         return phone;
     }
+    
     
      public void tampilkanInformasi() {
         System.out.println("Nama Dosen      : " + namaDosen );
