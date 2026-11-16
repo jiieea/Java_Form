@@ -33,7 +33,7 @@ public class Form extends javax.swing.JFrame {
         tableModel.addColumn("Nama");
         tableModel.addColumn("IPK");
         tableModel.addColumn("Angkatan");
-
+        tableModel.addColumn("Status");
         tblMahasiswa.setModel(tableModel);
     }
 
@@ -44,6 +44,7 @@ public class Form extends javax.swing.JFrame {
                 m.getNim(), m.getNama(), m.getIpk(), m.getAngkatan(), m.getStatus()
             });
         }
+        getTotalData();
     }
 
     /**
@@ -103,7 +104,7 @@ public class Form extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblMahasiswa);
 
-        reset.setText("Submit");
+        reset.setText("Reset");
         reset.addActionListener(this::resetActionPerformed);
 
         exit.setText("exit");
@@ -116,9 +117,7 @@ public class Form extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -160,9 +159,9 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(textAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exit))
-                .addGap(79, 79, 79)
+                .addGap(65, 65, 65)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,7 +177,6 @@ public class Form extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         String nim = textNpm.getText().trim();
-        System.out.println("NPM=[" + textNpm.getText() + "] this=" + this.hashCode());
         String nama = textName.getText().trim();
         String ipkText = textIpk.getText().trim();
         String angkatan = textAngkatan.getText().trim();
@@ -231,8 +229,8 @@ public class Form extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        int option = JOptionPane.showConfirmDialog(this,"are u sure wanna exit ?" , "Confirm" , JOptionPane.YES_NO_OPTION);
-        if(option == JOptionPane.YES_OPTION) {
+        int option = JOptionPane.showConfirmDialog(this, "are u sure wanna exit ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
             dispose();
         }
     }//GEN-LAST:event_exitActionPerformed
@@ -260,6 +258,31 @@ public class Form extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Form().setVisible(true));
+    }
+    
+     private void getTotalData() {
+        // add empty row
+        tableModel.addRow(new Object[]{
+            "",
+            "",
+            "",
+            "",});
+//     spacer to create a gap
+        int spacerIdx = tableModel.getRowCount() - 1;
+
+        tableModel.addRow(new Object[]{
+            "Total",
+            "",
+            "",
+            "",
+            "",
+            daftarMahasiswa.size(),});
+        int defaultHeight = tblMahasiswa.getRowHeight();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            tblMahasiswa.setRowHeight(i, defaultHeight);
+        }
+
+        tblMahasiswa.setRowHeight(spacerIdx, 10);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
