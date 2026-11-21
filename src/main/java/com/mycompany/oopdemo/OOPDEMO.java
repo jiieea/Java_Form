@@ -18,7 +18,7 @@ public class OOPDEMO {
         while (true) {
             System.out.print("Pilih mode (1/2:) ");
             String input = scanner.nextLine().trim();
-            if (input.equals("1") || input.equals("2")) { // 1 & 2 atau 3
+            if (input.equals("1") || input.equals("2")) { // 1 atau 2
 //                String -> integer
                 pilihan = Integer.parseInt(input);
                 break;
@@ -30,6 +30,7 @@ public class OOPDEMO {
             System.out.println("1. Input Mahasiswa");
             System.out.println("2. Input MataKuliah");
             System.out.println("3. Input Dosen");
+            System.out.println("4. Transaksi Demo");
             System.out.println("=============================================");
             String input = scanner.nextLine().trim();
             if (input.equalsIgnoreCase("1")) {
@@ -44,6 +45,18 @@ public class OOPDEMO {
             java.awt.EventQueue.invokeLater(() -> new Form().setVisible(true));
         }
     }
+    
+//    transaksi demo
+    private static void runTransactionDemo(Scanner scanner) {
+        ArrayList<Transaction> daftarTransaksi = new ArrayList<>();
+        boolean next = true;
+        while(next) {
+            System.out.println("Input Nominal Saldo Anda = ");
+            int balance = scanner.nextInt();
+            System.out.println("Input Jumlah Transfer =");
+            int amount = scanner.nextInt();            
+        }
+    }
 
 //    input data dosen\
     private static void runConsoleDosen(Scanner scanner) {
@@ -55,17 +68,17 @@ public class OOPDEMO {
             System.out.println("\n--- Input Data Dosen ke-" + counter + " ---");
             System.out.print("Masukkan Nama Dosen      : ");
             String namaDosen = scanner.nextLine().trim();
-             System.out.print("Masukkan NID     : ");
+            System.out.print("Masukkan NID     : ");
             String nid = scanner.nextLine().trim(); //ignore whitespace 
 
             System.out.print("Masukan Matkul   :");
             String lecture = scanner.nextLine().trim();
             System.out.println("Masukan nomor telepon : ");
             String phone = scanner.nextLine().trim();
-            
+
 //            addd new data and insert it to ArrayList
-        daftarDosen.add(new Dosen(namaDosen,nid ,lecture , phone)); 
-        while (true) {
+            daftarDosen.add(new Dosen(namaDosen, nid, lecture, phone));
+            while (true) {
                 System.out.print("\nTambah dosen lagi? (y/n): ");
                 String jawab = scanner.nextLine().trim();
                 if (jawab.equalsIgnoreCase("y")) { // y | Y
@@ -76,9 +89,9 @@ public class OOPDEMO {
                 }
                 System.out.println("Jawab dengan 'y' atau 'n'.");
             }
-        counter++;
+            counter++;
         }
-         System.out.println("\n=============================================");
+        System.out.println("\n=============================================");
         System.out.println("         DAFTAR SELURUH DOSEN            ");
         System.out.println("=============================================");
 
